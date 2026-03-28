@@ -841,7 +841,10 @@ body.light-mode .hero-card { background: rgba(255,255,255,0.9); }
   .card-2 { top: 50px; right: -10px; }
 }
 .logo img {
-  height: 45px;
+  height: 30px;
+  width: auto;
+  max-width: 100px;
+}
 }
 .logo-text h1 {
   color: #ffffff;
