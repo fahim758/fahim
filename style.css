@@ -903,35 +903,23 @@ onmouseout="this.children[0].style.transform='translateY(0)'"
   <i class="fas fa-download" style="transition:0.3s;"></i>
   Download Resume
 </a>
-.download-btn i {
-  display: inline-block;
-  transition: transform 0.3s ease;
+
+.download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 25px;
+  border-radius: 30px;
+  background: linear-gradient(135deg, #00d4ff, #007cf0);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
 }
 
-/* hover করলে bounce */
-.download-btn:hover i {
-  animation: bounce 0.6s infinite;
+/* hover*/
+.download-btn:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(0, 212, 255, 0.4);
 }
-
-/* animation */
-@keyframes bounce {
-  0% { transform: translateY(0); }
-  30% { transform: translateY(6px); }
-  50% { transform: translateY(0); }
-  70% { transform: translateY(4px); }
-  100% { transform: translateY(0); }
-}
-.download-btn i {
-  animation: bounce 1s infinite;
-}
-.download-btn i {
-  display: inline-block !important;
-  animation: bounce 1s infinite !important;
-}
-
-@keyframes bounce {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(6px); }
-  100% { transform: translateY(0); }
-}
-
