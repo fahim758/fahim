@@ -840,3 +840,6 @@ body.light-mode .hero-card { background: rgba(255,255,255,0.9); }
   .card-1 { bottom: 30px; left: -10px; }
   .card-2 { top: 50px; right: -10px; }
 }
+.logo img {
+  height: 45px;
+}
