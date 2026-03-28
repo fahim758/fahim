@@ -404,13 +404,63 @@ body.light-mode .hero-card { background: rgba(255,255,255,0.9); }
 .exp-label { font-size: 0.72rem; font-weight: 600; display: block; }
 
 .btn-resume {
-  display: inline-flex; align-items: center; gap: 10px;
-  padding: 12px 28px; border-radius: 50px;
-  border: 1px solid var(--border-accent); color: var(--text-primary);
-  background: var(--accent-glow); font-weight: 600;
-  transition: var(--transition); margin-top: 24px;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 32px;
+  border-radius: 50px;
+  background: linear-gradient(135deg, #00d4ff, #007cf0);
+  color: #000;
+  font-weight: 700;
+  font-size: 0.95rem;
+  overflow: hidden;
+  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), box-shadow 0.3s;
+  text-decoration: none;
+  margin-top: 24px;
 }
-.btn-resume:hover { background: var(--accent); color: #000; border-color: var(--accent); }
+
+.btn-resume::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -60%;
+  width: 40%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+  transform: skewX(-15deg);
+  animation: btnShimmer 2.8s ease-in-out infinite;
+}
+
+@keyframes btnShimmer {
+  0%   { left: -60%; opacity: 0; }
+  10%  { opacity: 1; }
+  50%  { left: 120%; opacity: 1; }
+  51%  { opacity: 0; }
+  100% { left: 120%; opacity: 0; }
+}
+
+.btn-resume::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50px;
+  border: 2px solid rgba(0, 212, 255, 0.5);
+  animation: btnPulse 2.5s cubic-bezier(0.4,0,0.6,1) infinite;
+}
+
+@keyframes btnPulse {
+  0%   { opacity: 0.7; transform: scale(1); }
+  70%  { opacity: 0; transform: scale(1.12); }
+  100% { opacity: 0; transform: scale(1.12); }
+}
+
+.btn-resume:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 212, 255, 0.5);
+}
+
+.btn-resume:active {
+  transform: scale(0.97);
+}
 
 .about-text {
   color: var(--text-secondary); margin-bottom: 20px; font-size: 0.98rem;
