@@ -885,29 +885,21 @@ body.light-mode .hero-card { background: rgba(255,255,255,0.9); }
   transition: 0.3s;
 }
 
-a.download-btn {
-  display: inline-flex !important;
-  align-items: center !important;
-  gap: 8px !important;
-  padding: 12px 25px !important;
-  border-radius: 30px !important;
-  background: linear-gradient(135deg, #00d4ff, #007cf0) !important;
-  color: #fff !important;
-  text-decoration: none !important;
-  font-weight: 600 !important;
-  transition: 0.3s !important;
-}
-
-a.download-btn:hover {
-  transform: translateY(-3px);
-}
-
-a.download-btn:hover i {
-  animation: bounce 0.6s infinite;
-}
-
-@keyframes bounce {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(6px); }
-  100% { transform: translateY(0); }
-}
+<a href="resume.pdf" download
+style="
+display:inline-flex;
+align-items:center;
+gap:8px;
+padding:12px 25px;
+border-radius:30px;
+background:linear-gradient(135deg,#00d4ff,#007cf0);
+color:#fff;
+text-decoration:none;
+font-weight:600;
+"
+onmouseover="this.children[0].style.transform='translateY(6px)'"
+onmouseout="this.children[0].style.transform='translateY(0)'"
+>
+  <i class="fas fa-download" style="transition:0.3s;"></i>
+  Download Resume
+</a>
