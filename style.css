@@ -890,27 +890,47 @@ body.light-mode .hero-card { background: rgba(255,255,255,0.9); }
   .card-1 { bottom: 30px; left: -10px; }
   .card-2 { top: 50px; right: -10px; }
 }
+/* NAV CONTAINER */
+.nc {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* LOGO */
 .logo {
   display: flex;
   align-items: center;
-  gap: 12px;
-
-  margin-right: auto; 
+  gap: 10px;
 }
 
-/* FIX: text vertical alignment */
+/* ICON */
+.logo-icon {
+  width: 45px;
+  height: 45px;
+  background: linear-gradient(135deg, #00d4ff, #007cf0);
+  border-radius: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: bold;
+  color: black;
+}
+
+/* TEXT FIX (MAIN ISSUE) */
 .logo-text {
   display: flex;
   flex-direction: column;
-  line-height: 1.1;
 }
 
+/* TEXT STYLE */
 .logo-text span {
-  font-size: 11px;
+  font-size: 10px;
   color: #7aa6c2;
   letter-spacing: 2px;
 }
-
 }
 
 .download-btn {
