@@ -102,26 +102,82 @@ body.light-mode .navbar.scrolled {
   height: 100%; display: flex; align-items: center; gap: 32px;
 }
 
+/* ===== NEW LOGO ===== */
 .nav-logo {
-  font-family: var(--font-display);
-  font-size: 1.6rem; font-weight: 800;
-  letter-spacing: -0.5px;
-  display: flex; align-items: center; gap: 6px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
   margin-right: auto;
+  text-decoration: none;
 }
 
-.logo-dot {
-  width: 8px; height: 8px; border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 10px var(--accent);
-  animation: pulse 2s infinite;
+.logo-icon-box {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #00d4ff 0%, #007cf0 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 18px rgba(0, 212, 255, 0.45), 0 4px 12px rgba(0, 0, 0, 0.4);
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
 }
 
-@keyframes pulse {
-  0%, 100% { box-shadow: 0 0 6px var(--accent); }
-  50% { box-shadow: 0 0 16px var(--accent); }
+.logo-icon-box::before {
+  content: '';
+  position: absolute;
+  top: -40%;
+  left: -40%;
+  width: 80%;
+  height: 80%;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  pointer-events: none;
 }
 
+.logo-icon-box span {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 800;
+  color: #000;
+  letter-spacing: -0.5px;
+  line-height: 1;
+  position: relative;
+  z-index: 1;
+}
+
+.logo-text-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  line-height: 1;
+}
+
+.logo-name {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: 0.08em;
+  line-height: 1;
+}
+
+.logo-role {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+body.light-mode .logo-name { color: #0f172a; }
+body.light-mode .logo-role { color: #94a3b8; }
+
+/* ===== NAV LINKS ===== */
 .nav-links { display: flex; gap: 4px; }
 .nav-link {
   font-size: 0.9rem; font-weight: 500;
@@ -338,6 +394,11 @@ body.light-mode .hero-card { background: rgba(255,255,255,0.9); }
 .card-1 { bottom: 60px; left: -20px; animation: float 4s ease-in-out infinite; }
 .card-2 { top: 80px; right: -20px; animation: float 4s ease-in-out infinite 2s; }
 @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 6px var(--accent); }
+  50% { box-shadow: 0 0 16px var(--accent); }
+}
 
 .scroll-hint {
   position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
@@ -621,9 +682,6 @@ body.light-mode .hero-card { background: rgba(255,255,255,0.9); }
 .testimonials-grid .testimonial-card:nth-child(5) {
   grid-column: span 1;
 }
-.testimonials-grid {
-  grid-template-columns: repeat(3, 1fr);
-}
 
 .testimonial-card {
   background: var(--bg-card); border-radius: var(--radius);
@@ -830,6 +888,28 @@ body.light-mode .hero-card { background: rgba(255,255,255,0.9); }
   font-size: 0.82rem; color: var(--text-muted);
 }
 
+/* ===== DOWNLOAD BUTTON ===== */
+.download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 25px;
+  border-radius: 30px;
+  background: linear-gradient(135deg, #00d4ff, #007cf0);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
+}
+.download-btn:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(0, 212, 255, 0.4);
+}
+.download-btn i { transition: transform 0.3s; }
+.download-btn:hover i { transform: translateY(3px); }
+
 /* ===== AOS ANIMATIONS ===== */
 [data-aos] { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
 [data-aos].aos-animate { opacity: 1; transform: translateY(0); }
@@ -881,6 +961,9 @@ body.light-mode .hero-card { background: rgba(255,255,255,0.9); }
   .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
   .contact-form { padding: 28px 20px; }
   .section { padding: 70px 0; }
+  .logo-name { font-size: 1.1rem; }
+  .logo-icon-box { width: 40px; height: 40px; }
+  .logo-icon-box span { font-size: 0.85rem; }
 }
 
 @media (max-width: 480px) {
@@ -889,112 +972,4 @@ body.light-mode .hero-card { background: rgba(255,255,255,0.9); }
   .hero-card { padding: 8px 12px; font-size: 0.8rem; }
   .card-1 { bottom: 30px; left: -10px; }
   .card-2 { top: 50px; right: -10px; }
-}
-/* NAV CONTAINER */
-.nc {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-/* LOGO */
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-/* ICON */
-.logo-icon {
-  width: 45px;
-  height: 45px;
-  background: linear-gradient(135deg, #00d4ff, #007cf0);
-  border-radius: 10px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  font-weight: bold;
-  color: black;
-}
-
-/* TEXT FIX (MAIN ISSUE) */
-.logo-text {
-  display: flex;
-  flex-direction: column;
-}
-
-/* TEXT STYLE */
-.logo-text span {
-  font-size: 10px;
-  color: #7aa6c2;
-  letter-spacing: 2px;
-}
-}
-
-.download-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 25px;
-  border-radius: 30px;
-  background: linear-gradient(135deg, #00d4ff, #007cf0);
-  color: #fff;
-  text-decoration: none;
-  font-weight: 600;
-  transition: 0.3s ease;
-  box-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
-}
-
-.download-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 25px;
-  border-radius: 30px;
-  background: linear-gradient(135deg, #00d4ff, #007cf0);
-  color: #fff;
-  text-decoration: none;
-  font-weight: 600;
-  transition: 0.3s;
-}
-
-<a href="resume.pdf" download
-style="
-display:inline-flex;
-align-items:center;
-gap:8px;
-padding:12px 25px;
-border-radius:30px;
-background:linear-gradient(135deg,#00d4ff,#007cf0);
-color:#fff;
-text-decoration:none;
-font-weight:600;
-"
-onmouseover="this.children[0].style.transform='translateY(6px)'"
-onmouseout="this.children[0].style.transform='translateY(0)'"
->
-  <i class="fas fa-download" style="transition:0.3s;"></i>
-  Download Resume
-</a>
-
-.download-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 25px;
-  border-radius: 30px;
-  background: linear-gradient(135deg, #00d4ff, #007cf0);
-  color: #fff;
-  text-decoration: none;
-  font-weight: 600;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
-}
-
-/* hover*/
-.download-btn:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 10px 25px rgba(0, 212, 255, 0.4);
 }
