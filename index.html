@@ -250,6 +250,17 @@ footer{background:var(--bg2);border-top:1px solid var(--bd);padding:60px 0 0}
 .fl a:hover{color:var(--ac);padding-left:5px}
 .fbot{border-top:1px solid var(--bd);padding:22px 0;display:flex;justify-content:space-between;align-items:center;font-size:.8rem;color:var(--t3)}
 
+/* NAV DROPDOWN */
+.nav-dropdown-wrap{position:relative}
+.nav-has-drop{display:flex;align-items:center;gap:5px}
+.nav-caret{font-size:.65rem;transition:transform .3s}
+.nav-dropdown-wrap:hover .nav-caret{transform:rotate(180deg)}
+.nav-dropdown{position:absolute;top:calc(100% + 8px);left:0;min-width:180px;background:var(--card);border:1px solid var(--bda);border-radius:var(--r2);padding:6px;opacity:0;visibility:hidden;transform:translateY(-8px);transition:var(--tr);z-index:999;box-shadow:var(--sh)}
+.nav-dropdown-wrap:hover .nav-dropdown{opacity:1;visibility:visible;transform:translateY(0)}
+.nav-dropdown li a{display:flex;align-items:center;gap:9px;padding:9px 13px;border-radius:6px;font-size:.86rem;color:var(--t2);transition:var(--tr);white-space:nowrap}
+.nav-dropdown li a:hover{color:var(--ac);background:var(--glow)}
+.nav-dropdown li a i{font-size:.78rem;color:var(--ac);width:14px}
+
 /* AOS */
 [data-a]{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
 [data-a].in{opacity:1;transform:translateY(0)}
@@ -283,6 +294,7 @@ footer{background:var(--bg2);border-top:1px solid var(--bd);padding:60px 0 0}
   .fr{grid-template-columns:1fr}
   .fbot{flex-direction:column;gap:7px;text-align:center}
   form.cf{padding:24px 18px}
+  .nav-dropdown{position:static;opacity:1;visibility:visible;transform:none;box-shadow:none;border:none;background:rgba(0,212,255,.04);margin-top:4px;padding:4px 0 4px 12px}
   .sec{padding:70px 0}
 }
 @media(max-width:480px){
@@ -426,7 +438,7 @@ footer{background:var(--bg2);border-top:1px solid var(--bd);padding:60px 0 0}
     <ul class="nl" id="nl">
       <li><a href="#home" class="on">Home</a></li>
       <li><a href="#about">About</a></li>
-      <li><a href="#services">Services</a></li>
+      <li class="nav-dropdown-wrap"><a href="#services" class="nav-has-drop">Services <i class="fas fa-chevron-down nav-caret"></i></a><ul class="nav-dropdown"><li><a href="seo-service.html"><i class="fas fa-search"></i> SEO Service</a></li></ul></li>
       <li><a href="#portfolio">Portfolio</a></li>
       <li><a href="#testimonials">Reviews</a></li>
       <li><a href="#blog">Blog</a></li>
@@ -759,7 +771,7 @@ font-weight:600;
 </a>
         </div>
       </div>
-      <div class="fl"><h4>Quick Links</h4><ul><li><a href="#home">Home</a></li><li><a href="#about">About</a></li><li><a href="#services">Services</a></li><li><a href="#portfolio">Portfolio</a></li><li><a href="#contact">Contact</a></li></ul></div>
+      <div class="fl"><h4>Quick Links</h4><ul><li><a href="#home">Home</a></li><li><a href="#about">About</a></li><li class="nav-dropdown-wrap"><a href="#services" class="nav-has-drop">Services <i class="fas fa-chevron-down nav-caret"></i></a><ul class="nav-dropdown"><li><a href="seo-service.html"><i class="fas fa-search"></i> SEO Service</a></li></ul></li><li><a href="#portfolio">Portfolio</a></li><li><a href="#contact">Contact</a></li></ul></div>
       <div class="fl"><h4>Services</h4><ul><li><a href="#">SEO Audit</a></li><li><a href="#">Keyword Research</a></li><li><a href="#">On-Page SEO</a></li><li><a href="#">Technical SEO</a></li><li><a href="#">Content Writing</a></li></ul></div>
       <div class="fl"><h4>Hire Me On</h4><ul><li> <a href="https://www.fiverr.com/users/fahimislam4039/" target="_blank">Fiverr</a></li><li  <a href="https://www.upwork.com/freelancers/~019b06335b61bf6f0c" target="_blank" rel="noopener noreferrer">
     Upwork</a></li><li><a href="https://www.linkedin.com/in/fahim-islam-content-writer/" target="_blank">LinkedIn</a></li></ul></div>
