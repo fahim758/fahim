@@ -921,15 +921,20 @@ cf.addEventListener('submit',async e=>{
 });
 
 // LIGHTBOX
-var lbImages = [
-  { src: 'embroidery-digitizing-keyword.png', caption: 'Embroidery Digitizing – 44 Keywords Ranked & Traffic Growth' },
-  { src: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1400&q=90', caption: 'Tech Startup — Page 1 Rankings' },
-  { src: 'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=1400&q=90', caption: 'Healthcare Clinic — Local Domination' },
-  { src: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=1400&q=90', caption: 'Lifestyle Blog — Authority Building' },
-  { src: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=1400&q=90', caption: 'Travel Blog — Content Refresh' },
-  { src: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1400&q=90', caption: 'Enterprise Site — Core Web Vitals Fix' }
-];
 var lbCurrent = 0;
+
+function lbGetImages() {
+  var imgs = [];
+  document.querySelectorAll('#portfolio .pi img').forEach(function(img) {
+    var pi = img.closest('.pi');
+    var h3 = pi.closest('.pc').querySelector('h3');
+    imgs.push({
+      src: img.src,
+      caption: h3 ? h3.textContent : ''
+    });
+  });
+  return imgs;
+}
 
 function lbOpen(i) {
   lbCurrent = i;
@@ -940,15 +945,16 @@ function lbOpen(i) {
 }
 
 function lbShow() {
+  var images = lbGetImages();
   var img = document.getElementById('lb-img');
   var cap = document.getElementById('lb-caption');
   var cnt = document.getElementById('lb-counter');
   img.style.opacity = '0';
   img.style.transform = 'scale(0.93)';
   setTimeout(function(){
-    img.src = lbImages[lbCurrent].src;
-    cap.textContent = lbImages[lbCurrent].caption;
-    cnt.textContent = (lbCurrent + 1) + ' / ' + lbImages.length;
+    img.src = images[lbCurrent].src;
+    cap.textContent = images[lbCurrent].caption;
+    cnt.textContent = (lbCurrent + 1) + ' / ' + images.length;
     img.style.transition = 'opacity .3s ease, transform .3s ease';
     img.style.opacity = '1';
     img.style.transform = 'scale(1)';
@@ -960,8 +966,8 @@ function lbClose() {
   document.body.style.overflow = '';
 }
 
-function lbPrev() { lbCurrent = (lbCurrent - 1 + lbImages.length) % lbImages.length; lbShow(); }
-function lbNext() { lbCurrent = (lbCurrent + 1) % lbImages.length; lbShow(); }
+function lbPrev() { var n = lbGetImages().length; lbCurrent = (lbCurrent - 1 + n) % n; lbShow(); }
+function lbNext() { var n = lbGetImages().length; lbCurrent = (lbCurrent + 1) % n; lbShow(); }
 
 document.addEventListener('keydown', function(e){
   var ov = document.getElementById('lb-overlay');
