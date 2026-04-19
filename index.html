@@ -913,72 +913,70 @@ cf.addEventListener('submit',async e=>{
 
 // LIGHTBOX
 (function(){
-  const overlay = document.getElementById('lb-overlay');
-  const lbImg = document.getElementById('lb-img');
-  const lbCaption = document.getElementById('lb-caption');
-  const lbCounter = document.getElementById('lb-counter');
-  const lbClose = document.getElementById('lb-close');
-  const lbPrev = document.getElementById('lb-prev');
-  const lbNext = document.getElementById('lb-next');
-
-  let images = [];
-  let current = 0;
-
-  function collectImages(){
-    images = [];
-    document.querySelectorAll('.lb-btn').forEach(btn => {
-      images.push({ src: btn.dataset.img, caption: btn.dataset.caption });
+  // Build images array from all portfolio cards
+  function getImages(){
+    const imgs = [];
+    document.querySelectorAll('#portfolio .pi').forEach(pi => {
+      const img = pi.querySelector('img');
+      const btn = pi.querySelector('.lb-btn');
+      if(img){
+        imgs.push({
+          src: btn ? btn.dataset.img : img.src,
+          caption: btn ? btn.dataset.caption : (img.alt || '')
+        });
+      }
     });
+    return imgs;
   }
 
   function openLightbox(index){
-    collectImages();
-    current = index;
-    showImage();
-    overlay.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
+    const images = getImages();
+    let current = index;
+    const overlay = document.getElementById('lb-overlay');
+    const lbImg = document.getElementById('lb-img');
+    const lbCaption = document.getElementById('lb-caption');
+    const lbCounter = document.getElementById('lb-counter');
+
+    function show(i){
+      lbImg.style.opacity='0';
+      lbImg.style.transform='scale(0.95)';
+      setTimeout(()=>{
+        lbImg.src = images[i].src;
+        lbCaption.textContent = images[i].caption;
+        lbCounter.textContent = (i+1)+' / '+images.length;
+        lbImg.style.transition='opacity .3s,transform .3s';
+        lbImg.style.opacity='1';
+        lbImg.style.transform='scale(1)';
+      },120);
+    }
+
+    overlay.style.display='flex';
+    document.body.style.overflow='hidden';
+    show(current);
+
+    document.getElementById('lb-prev').onclick=()=>{ current=(current-1+images.length)%images.length; show(current); };
+    document.getElementById('lb-next').onclick=()=>{ current=(current+1)%images.length; show(current); };
+    document.getElementById('lb-close').onclick=close;
+    overlay.onclick=e=>{ if(e.target===overlay) close(); };
+
+    function close(){
+      overlay.style.display='none';
+      document.body.style.overflow='';
+    }
+
+    function onKey(e){
+      if(e.key==='Escape') close();
+      if(e.key==='ArrowLeft'){ current=(current-1+images.length)%images.length; show(current); }
+      if(e.key==='ArrowRight'){ current=(current+1)%images.length; show(current); }
+    }
+    document.addEventListener('keydown', onKey);
+    overlay._cleanup = ()=> document.removeEventListener('keydown', onKey);
   }
 
-  function showImage(){
-    lbImg.style.opacity = '0';
-    lbImg.style.transform = 'scale(0.95)';
-    setTimeout(() => {
-      lbImg.src = images[current].src;
-      lbCaption.textContent = images[current].caption;
-      lbCounter.textContent = (current + 1) + ' / ' + images.length;
-      lbImg.style.transition = 'opacity .3s ease, transform .3s ease';
-      lbImg.style.opacity = '1';
-      lbImg.style.transform = 'scale(1)';
-    }, 150);
-    lbPrev.style.display = images.length > 1 ? 'flex' : 'none';
-    lbNext.style.display = images.length > 1 ? 'flex' : 'none';
-  }
-
-  function closeLightbox(){
-    overlay.style.display = 'none';
-    document.body.style.overflow = '';
-  }
-
-  document.querySelectorAll('.lb-btn').forEach((btn, i) => {
-    btn.addEventListener('click', () => openLightbox(i));
-  });
-
-  document.querySelectorAll('.lb-img').forEach((img, i) => {
-    img.style.cursor = 'zoom-in';
-    img.addEventListener('click', () => openLightbox(i));
-  });
-
-  lbClose.addEventListener('click', closeLightbox);
-  overlay.addEventListener('click', e => { if(e.target === overlay) closeLightbox(); });
-
-  lbPrev.addEventListener('click', () => { current = (current - 1 + images.length) % images.length; showImage(); });
-  lbNext.addEventListener('click', () => { current = (current + 1) % images.length; showImage(); });
-
-  document.addEventListener('keydown', e => {
-    if(overlay.style.display === 'none') return;
-    if(e.key === 'Escape') closeLightbox();
-    if(e.key === 'ArrowLeft') { current = (current - 1 + images.length) % images.length; showImage(); }
-    if(e.key === 'ArrowRight') { current = (current + 1) % images.length; showImage(); }
+  // Attach click to each portfolio image area (both img and button)
+  document.querySelectorAll('#portfolio .pi').forEach((pi, i) => {
+    pi.style.cursor = 'zoom-in';
+    pi.addEventListener('click', () => openLightbox(i));
   });
 })();
 
